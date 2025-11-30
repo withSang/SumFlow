@@ -6,7 +6,7 @@ import { Button, Tooltip, ConfigProvider, theme as antTheme } from 'antd';
 import { useSheetStore } from './store/useSheetStore';
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
   const { 
       activeSheetId, 
       sheets, 
@@ -59,7 +59,16 @@ function App() {
             }
         }}
     >
-        <div className="flex h-screen w-full overflow-hidden bg-white dark:bg-[#141414] transition-colors duration-300">
+        <div className="flex h-screen w-full overflow-hidden bg-white dark:bg-[#141414] transition-colors duration-300 relative">
+        
+        {/* Mobile Backdrop */}
+        {sidebarOpen && (
+            <div 
+                className="absolute inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+                onClick={() => setSidebarOpen(false)}
+            />
+        )}
+
         <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         
         <div className="flex-1 flex flex-col min-w-0 h-full">

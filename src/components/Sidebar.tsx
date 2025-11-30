@@ -7,7 +7,8 @@ import {
   DownloadOutlined,
   MenuOutlined,
   CalculatorOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
+  CloseOutlined
 } from '@ant-design/icons';
 import { Button, Tooltip, Popconfirm } from 'antd';
 import clsx from 'clsx';
@@ -60,25 +61,41 @@ export const Sidebar: React.FC<{ isOpen: boolean; setIsOpen: (v: boolean) => voi
     e.target.value = '';
   };
 
+  const handleSheetClick = (id: string) => {
+      setActiveSheet(id);
+      // Close sidebar on mobile when a sheet is selected
+      if (window.innerWidth < 768) {
+          setIsOpen(false);
+      }
+  };
+
   return (
     <div className={clsx(
-      "flex flex-col bg-gray-50 dark:bg-[#262626] border-r border-gray-200 dark:border-[#303030] transition-all duration-300 h-full",
-      isOpen ? "w-64" : "w-0 overflow-hidden border-r-0"
+      "flex flex-col bg-gray-50 dark:bg-[#262626] border-r border-gray-200 dark:border-[#303030] h-full z-50",
+      "absolute md:relative",
+      isOpen ? "w-64 translate-x-0 shadow-xl md:shadow-none" : "w-0 -translate-x-full md:translate-x-0 md:w-0 overflow-hidden border-r-0"
     )}>
       {/* Header */}
-      <div className="h-12 flex items-center justify-between px-4 border-b border-gray-200 dark:border-[#303030] flex-shrink-0">
+      <div className="h-12 flex items-center justify-between px-4 border-b border-gray-200 dark:border-[#303030] flex-shrink-0 min-w-[16rem]">
         <div className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
           <CalculatorOutlined className="text-[#0f62fe]" />
           <span className="tracking-tight">SumFlow</span>
         </div>
+        
+        <Button 
+            type="text"
+            icon={<CloseOutlined />}
+            className="md:hidden text-gray-500 dark:text-gray-400"
+            onClick={() => setIsOpen(false)}
+        />
       </div>
 
       {/* Sheet List */}
-      <div className="flex-1 overflow-y-auto p-2 space-y-1">
+      <div className="flex-1 overflow-y-auto p-2 space-y-1 min-w-[16rem]">
         {sheets.map((sheet) => (
           <div
             key={sheet.id}
-            onClick={() => setActiveSheet(sheet.id)}
+            onClick={() => handleSheetClick(sheet.id)}
             className={clsx(
               "group flex items-center justify-between px-3 py-2 rounded cursor-pointer text-sm transition-colors",
               sheet.id === activeSheetId
@@ -110,7 +127,7 @@ export const Sidebar: React.FC<{ isOpen: boolean; setIsOpen: (v: boolean) => voi
       </div>
 
       {/* Footer Actions */}
-      <div className="p-3 border-t border-gray-200 dark:border-[#303030] flex-shrink-0 space-y-2">
+      <div className="p-3 border-t border-gray-200 dark:border-[#303030] flex-shrink-0 space-y-2 min-w-[16rem]">
         <Button 
           type="primary" 
           block 

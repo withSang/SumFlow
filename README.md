@@ -2,7 +2,9 @@
 
 SumFlow is a modern, text-based calculation notepad that combines the flexibility of a text editor with the power of a spreadsheet. It allows you to write calculations in natural language, handle unit conversions, and reference variables seamlessly.
 
-![SumFlow Screenshot](https://via.placeholder.com/800x450.png?text=SumFlow+Screenshot)
+Visit [http://sumflow.withsang.com/](http://sumflow.withsang.com/).
+
+<img width="768" alt="image" src="https://github.com/user-attachments/assets/3996d794-6645-4429-8878-f9884340d1d3" />
 
 ## Features
 

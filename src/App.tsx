@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { SheetEditor } from './components/SheetEditor';
-import { MenuOutlined, UndoOutlined, RedoOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons';
+import { MenuOutlined, UndoOutlined, RedoOutlined, SunOutlined, MoonOutlined, GithubOutlined } from '@ant-design/icons';
 import { Button, Tooltip, ConfigProvider, theme as antTheme } from 'antd';
 import { useSheetStore } from './store/useSheetStore';
 
@@ -95,6 +95,15 @@ function App() {
             </div>
             
             <div className="flex items-center gap-1 pl-2">
+                <Tooltip title="View on GitHub">
+                    <Button
+                        type="text"
+                        icon={<GithubOutlined />}
+                        href="https://github.com/withSang/SumFlow"
+                        target="_blank"
+                        className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#262626]"
+                    />
+                </Tooltip>
                 <Tooltip title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}>
                     <Button
                         type="text"
